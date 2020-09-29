@@ -2,17 +2,28 @@ import React from 'react';
 import ThemeSwitcher from "../partials/ThemeSwitcher";
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isDarkMode: false };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState((prevState, props) => ({
+            isDarkMode: !prevState.isDarkMode
+        }));
+    }
 
     render() {
         return (
-            <div className="app">
+            <div className={"app" + (this.state.isDarkMode ? " dark-mode" : "")}>
 
                 <div className="level header">
                     <div className="title-container">
                         <div className="morningscore-avatar"></div>
                         <h1 className="title">Dark Mode Challenge</h1>
                     </div>
-                    <ThemeSwitcher/>
+                    <ThemeSwitcher handleClick={ this.handleClick } isDarkMode={ this.state.isDarkMode }/>
                 </div>
 
 
